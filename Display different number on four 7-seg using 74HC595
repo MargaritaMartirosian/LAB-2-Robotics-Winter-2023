@@ -1,0 +1,99 @@
+/* This program is used to display different numbers on a 4 digit seven segment. 
+Displaying number 2023 using array and shiftOut() function for the  74HC595. 
+The  74HC595 controls eight different output pins with only three input pins. 
+Using shift reister. One pin is for the latch, other is for shift and another for data. 
+The main theme of this program is the shiftOut() function. 
+ */
+int LatchPin = 4;  // defines pin for the latch
+int ShiftPin = 5;  // defines pin for shift 
+int DataInput = 3; // defines pin for data input 
+int digPins[4] = {13,12,11,10}; // has four dedicated common pins to control each digit separately 
+
+const byte digits[10] = {  
+  // defines an array of bytes that represent the pattern to light up each segment of a digit.
+  B00111111,  // 0
+  B00000110,  // 1
+  B01011011,  // 2
+  B01001111,  // 3
+  B01100110,  // 4
+  B01101101,  // 5
+  B01111101,  // 6
+  B0000111,   // 7
+  B01111111,  // 8
+  B01101111,  // 9
+};
+
+void setup() { // code run once 
+  pinMode (LatchPin ,OUTPUT); // Latch pin is defined as an Output 
+  pinMode (ShiftPin, OUTPUT); // Shift pin is defined as an Output 
+  pinMode (DataInput, OUTPUT);// Data pin is defined as an Output 
+  pinMode (13, OUTPUT);// digit pin is defined as an Output
+  pinMode (12, OUTPUT);// digit pin is defined as an Output
+  pinMode (11, OUTPUT);// digit pin is defined as an Output
+  pinMode (10, OUTPUT); // digit pin is defined as an Output
+}
+
+void loop () { // code runs in a loop 
+------------------------ PRINT 3 -------------------------
+  digitalWrite (13, HIGH);// pin 13 is ON 
+  digitalWrite (12, HIGH);// pin 12 is ON 
+  digitalWrite (11, HIGH);// pin 11 is ON 
+  digitalWrite (10 ,LOW); // pin 10 is OFF
+  digitalWrite (LatchPin, LOW); // Latch pin is OFF
+  shiftOut(DataInput, ShiftPin, MSBFIRST, digits[3]);
+  // shiftOut is a function 
+  // DataInput used to define pin where data for shift register will be output
+  // ShiftPin used for clock signal that is output 
+  // MSBFIRST is for Most significant Bit first
+  // digits[3] used to print 3 on seven segment 
+  digitalWrite (LatchPin, HIGH); // Latch is ON 
+
+  delay(5);
+------------------------ PRINT 2 -------------------------
+  digitalWrite (13, HIGH);// pin 13 is ON 
+  digitalWrite (12, HIGH);// pin 12 is ON 
+  digitalWrite (11,LOW);  // pin 11 is OFF
+  digitalWrite (10, HIGH);// pin 10 is ON 
+  digitalWrite (LatchPin, LOW);// Latch pin is OFF
+  shiftOut(DataInput, ShiftPin, MSBFIRST, digits[2]);
+  // shiftOut is a function 
+  // DataInput used to define pin where data for shift register will be output
+  // ShiftPin used for clock signal that is output 
+  // MSBFIRST is for Most significant Bit first
+  // digits[2] used to print 2 on seven segment 
+  digitalWrite (LatchPin, HIGH); // Latch is ON 
+  
+  delay(5);
+------------------------ PRINT 0 -------------------------
+  digitalWrite (13, HIGH);// pin 13 is ON 
+  digitalWrite (12, LOW); // pin 12 is OFF
+  digitalWrite (11, HIGH);// pin 11 is ON 
+  digitalWrite (10 ,HIGH);// pin 10 is ON 
+  digitalWrite (LatchPin, LOW);// Latch pin is OFF
+  shiftOut(DataInput, ShiftPin, MSBFIRST, digits[0]);
+  // shiftOut is a function 
+  // DataInput used to define pin where data for shift register will be output
+  // ShiftPin used for clock signal that is output 
+  // MSBFIRST is for Most significant Bit first
+  // digits[0] used to print 0 on seven segment
+  digitalWrite (LatchPin, HIGH); // Latch is ON 
+
+  delay(5);
+------------------------ PRINT 2 -------------------------
+  digitalWrite (13, LOW);// pin 13 is OFF
+  digitalWrite (12, HIGH);// pin 12 is ON
+  digitalWrite (11, HIGH);// pin 11 is ON 
+  digitalWrite (10 ,HIGH);// pin 10 is ON
+  digitalWrite (LatchPin, LOW);// Latch pin is OFF
+  shiftOut(DataInput, ShiftPin, MSBFIRST, digits[2]);
+  // shiftOut is a function 
+  // DataInput used to define pin where data for shift register will be output
+  // ShiftPin used for clock signal that is output 
+  // MSBFIRST is for Most significant Bit first
+  // digits[2] used to print 2 on seven segment
+  digitalWrite (LatchPin, HIGH); // Latch is ON
+
+  delay(5);
+  
+  
+}
