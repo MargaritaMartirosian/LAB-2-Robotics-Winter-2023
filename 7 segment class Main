@@ -1,0 +1,17 @@
+/* Arduino sketch that uses a custom SevenSegment library to control a seven-segment display.
+ * Main of program, where the program starts executing. Main file includes header file.
+ * Calls functions defined in other codes. 
+*/
+--------------------------- ( MAIN ) -----------------------------------------------
+#include "SevenSegment.h" // Include the library that is created
+
+int SevenSegmentPins[8]{2,3,4,5,6,7,8,9}; // array of pin numbers is defined 
+SevenSegment  Display(SevenSegmentPins);  // SevenSegment object is created with the pin numbers 
+---------SETUP--------
+void setup(){ // Run the code once
+  Display.init();                         // Initialize the setup function
+---------LOOP---------
+} 
+void loop(){ // Run the code in a loop
+  Display.displaySevenSegment (int code); // displaySevenSegment method is called 
+}
