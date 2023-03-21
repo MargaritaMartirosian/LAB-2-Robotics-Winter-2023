@@ -1,0 +1,22 @@
+/* Arduino sketch that uses a custom PB library to display state of a PB.
+ * Main of program, where the program starts executing. Main file includes header file.
+ * Calls functions defined in other codes. 
+*/
+--------------------------- ( MAIN ) -----------------------------------------------
+#include "PB.h"      // Include the library that is created
+#include "Arduino.h" // Include the Arduino library
+
+int buttonPin = 2; // Initialize that this connected to pin 2 of arduino
+
+PB button(buttonPin); // Creates object
+---------SETUP--------
+void setup() { // Run code once
+  Serial.begin(9600); // initializes the serial communication
+                      // baud rate is set to 9600 
+} 
+---------LOOP---------
+void loop() { // Run the code in loop
+  if (button.pressed()) { // if PB is pressed
+    Serial.println("Button pressed!");// Display on Serial Monitor (SM
+  }
+} 
