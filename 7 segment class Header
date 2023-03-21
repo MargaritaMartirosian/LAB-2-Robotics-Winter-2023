@@ -1,0 +1,28 @@
+/* Header for class library SevenSegment. Class is defined using encapsulation
+ *  There is  private and public members
+ *  It includes a default constructor and other one that takes an integer 
+ *  Function init() used for initialization, Methode called displaySevenSegment().
+ *  Main theme is the Header file. 
+ */
+--------------------------- ( HEADER ) -----------------------------------------------
+#ifndef SevenSegment_h // If not defined
+#define SevenSegment_h // Define this library
+#include<Arduino.h>; // Added Arduino library
+------------------- ----------CLASS ----------------------------
+class SevenSegment { // Name of class
+------------------- ENCAPSULATION/CONSTRUCTOR ------------------
+  private:     // The encapsulation
+  int *pin;  // Initialize the pin
+  public: 
+  SevenSegment(){}          // Default Constructor
+  SevenSegment(int pin[8]){ // calling the constructor 
+-------------------------INITIALISATION-------------------------
+  void init(); //function that initializes the pins that are used to control the seven segment 
+-----------------------METHODE/FUNCTION-------------------------
+  void displaySevenSegment (int code); 
+  // code represents the digit that needs to be displayed 
+  // displaySevenSegment = methode/function 
+}; 
+
+#endif // End of if not defined
+  
