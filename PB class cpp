@@ -1,0 +1,31 @@
+/*This is a cpp file for the PB class.
+ * Code includes the #include directive to include the "PB.h" and "Arduino.h" libraries
+ * Use of INUT_PULLUP for pinMode.
+ * Shows the initalisation and display. 
+ */
+--------------------------- ( CPP ) -----------------------------------------------
+#include "PB.h"  // Include the library that is created
+#include "Arduino.h"  // Include the Arduino library
+-------------------------INITIALISATION-------------------------
+PB::PB(int buttonPin) { // Define the variable constructor
+  pin = buttonPin;      // pin that is private is equal to the buttonPin
+  state = LOW;          // Set state LOW
+  pinMode(pin, INPUT_PULLUP); // use of internal resistor
+}
+-----------------------DISPLAY----------------------------------  
+bool PB::pressed() { // function returns boolean value
+  
+  int reading = digitalRead(pin); // reading the value of signal on a pin
+
+  if (reading == LOW && state == HIGH) { 
+    // If reading is equal to low and state is equal to HIGH...
+        delay(50);  // Delay  50 ms
+        reading = digitalRead(pin);// Set reading equal to pin
+        if (reading == LOW) { // If reading is LOW....
+        state = LOW;  // If state is low = make it true
+        return true; 
+        } 
+      } 
+      state = reading; // If state is equalto reading = Make it false
+      return false; 
+ } 
