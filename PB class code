@@ -1,0 +1,54 @@
+/* 
+This code defines a class called PB.
+It is used to display the state of a PB on the serial monitor (SM). 
+The code uses encapsulation , protects the pin variable.
+It initializes the pins by using a constructor/init function.
+The main theme is the use of a class. 
+ */
+--------------------------- ( CODE ) -----------------------------------------------
+-----------------------------CLASS ----------------------------
+class PB {    // name of class 
+------------------- ENCAPSULATION/CONSTRUCTOR ------------------
+  private:   // The encapsulation
+  int pin;   // Initializes the pin
+  int state; // Initializes the state
+
+  public: // Can be accces outside the class
+    PB(){}                // default constructor
+    PB(int buttonPin) {   // calling the constructor
+    pin = buttonPin;              // pin that is private is equal to the buttonPin
+    state = LOW;                  // Set the state LOW
+    pinMode(pin, INPUT_PULLUP);   // use of internal resistor
+    } 
+-----------------------DISPLAY----------------------------------  
+    bool pressed() {                  // PB is pressed
+    int reading = digitalRead(pin);   // reading the value of signal on a pin
+       // If reading is equal to low and state is equal to HIGH...
+      if (reading == LOW && state == HIGH) {
+        delay(50);  // Delay 50 ms
+        
+        reading = digitalRead(pin);// Set reading equal to pin
+        if (reading == LOW) { // If reading is LOW....
+          state = LOW; // If state is low = make it true
+          return true; 
+        } 
+      } 
+      state = reading; // If state is equalto reading = Make it false
+      return false; 
+    } 
+}; 
+
+int buttonPin = 2; // buttonPin equal to 2
+
+PB button(buttonPin); // creates object that represents a push button connected to pin 2
+--------------------------SETUP----------------------------------
+void setup() { // run the code once
+  Serial.begin(9600); // initializes the serial communication
+                      // baud rate is set to 9600 
+} 
+--------------------------LOOP-----------------------------------
+void loop() { // run the code in loop
+  if (button.pressed()) { // if button is pressed
+    Serial.println("Push Button is pressed"); // Display on Serial Monitor (SM)
+  } 
+} 
