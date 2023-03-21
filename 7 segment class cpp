@@ -1,0 +1,44 @@
+/* This is a CPP file that defines a class SevenSegment. 
+ *  Controls a seven segment display using array.
+ *  Include header file that defines a class.
+ *  Main theme of program is the use of a CPP file. 
+ */
+--------------------------- ( CPP ) -----------------------------------------------
+#include "SevenSegment.h" // Include the library that is created
+SevenSegment::SevenSegment(int pin[8]){ // Constructor takes array of 8 pins as input
+                                        // initialize pin memeber varibale                             
+this->pin = pin;                        // Sets "pin" to be equal to the value of input parameter "pin". 
+
+} 
+-------------------------INITIALISATION-------------------------
+void SevenSegment::init(){ 
+  // Method that initializes pins used to control the 7 segment by setting to INPUT/OUTPUT.
+  for(int i =0; i<8; i++){       // SetS the "i" to be equal 0 and less than 8 as it increases
+  pinMode(pin[i], OUTPUT);       // SetS the pin[i] as an OUTPUT
+    } 
+    } 
+-----------------------DISPLAY----------------------------------  
+void SevenSegment::displaySevenSegment (int code){ // Displays digit based on integer input 
+  
+   byte SevenSegmentCode[10][8]={ 
+    // represents a number that can be displayed 
+        {1,1,1,1,1,1,1,0},  // 0
+        {0,0,1,1,1,0,0,0},  // 1
+        {1,0,0,1,1,1,0 1},  // 2
+        {0,1,1,1,1,1,0,1},  // 3
+        {0,0,1,1,1,0,1,1},  // 4
+        {0,1,1,1,0,1,1,1},  // 5
+        {1,1,1,1,0,1,1,1},  // 6
+        {0,0,1,1,1,1,0,0},  // 7
+        {1,1,1,1,1,1,1,1},  // 8
+        {0,0,1,1,1,1,1,1},  // 9
+      }; 
+      for (int i = 0; i < 8; i++){ 
+        digitalWrite(pin[i],SevenSegmentCode[code][i]); 
+        // digitalWrite for state of each segment HIGH or LOW
+        // based on value stored in SevenSegmentCode
+        // purpose of loop is to control th state of each segment 
+      }
+      delay(1000); // Delay 1 second
+   } 
+
