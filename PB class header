@@ -1,0 +1,22 @@
+/* Header for class library PB.  Class is defined using encapsulation
+ * There are  private and public members
+ * It includes a default constructor and other one that takes an integer 
+ * Main theme is the Header file. 
+ */
+--------------------------- ( HEADER ) -----------------------------------------------
+#ifndef PB_H // If not define
+#define PB_H //Define library
+#include<Arduino.h>; // Added Arduino library
+------------------- ----------CLASS ----------------------------
+class PB { // Name of class
+------------------- ENCAPSULATION/CONSTRUCTOR ------------------
+  private: // The encapsulation
+     int pin;   // Initialize the pin
+     int state; // Initialize the state
+
+  public: 
+    PB(){}                      // default constructor
+    PB(int buttonPin) {         // calling the constructor 
+    bool pressed() {            // PB is pressed
+}; 
+#endif // end if not defined
