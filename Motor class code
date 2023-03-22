@@ -1,0 +1,79 @@
+/* This code is used to control two motors that are placed on a Robot Car.
+ * Motor class program that is using encapsulation , constructor, functions. 
+ * Separated in 3 files, Main,cpp and Header. 
+ * The motor goes forward, backwards and then stops. 
+ * Main theme of program is the Motor Class. 
+ */
+--------------------------- ( CODE ) -----------------------------------------------
+------------------- ----------CLASS ----------------------------
+class MOTOR{
+------------------- ENCAPSULATION/CONSTRUCTOR ------------------
+  private:  // encapsulation 
+  int AIN1; // Motor A
+  int BIN1; // Motor B
+  int PWMA; // Speed for Motor A
+  int PWMB; // Speed for Motor B 
+  int STBY; // STBY pin 3 on Arduino Uno used for direction
+
+  public:   // constructor
+  MOTOR(int ain1,int bin1,int pwma, int pwmb , int stby):
+  AIN1(ain1),BIN1(bin1),PWMA(pwma),PWMB(pwmb),STBY(stby){}
+-------------------------INITIALISATION-------------------------
+  void init() {
+     for (int i=3; i <9; i ++){
+  pinMode( i, OUTPUT); // i variable is set as ans OUTPUT
+ 
+  }
+   pinMode(STBY,OUTPUT);//STBY pin is set as an OUTPUT 
+}
+-------------------------FUNCTIONS-------------------------
+void forward () {         // details for forward function
+  digitalWrite(STBY,HIGH);// STBY pin 3 is ON
+  digitalWrite(AIN1, 1);  // Motor 1 clockwise direction 
+  analogWrite(PWMA, 100); // Speed is 100
+  digitalWrite(BIN1, 1);  // Motor 2 clockwise direction 
+  analogWrite(PWMB, 100); // Speed is 100
+  delay(100);
+}
+void backward () {        // details for backward function
+  digitalWrite(STBY,HIGH);// STBY pin 3 is ON
+  digitalWrite(AIN1, 0);  // Motor 1 counterclockwise direction 
+  analogWrite(PWMA, 100); // Speed is 100
+  digitalWrite(BIN1, 0);  // Motor 2 counterclockwise direction 
+  analogWrite(PWMB, 100); // Speed is 100
+  delay(100);
+}
+void Stop () {            // datails for stop function
+  digitalWrite(STBY,LOW); // STBY pin 3 is OFF
+  digitalWrite(AIN1, 1);  // Motor 1 clockwise direction 
+  analogWrite(PWMA, 0);   // Speed is 0 
+  digitalWrite(BIN1, 1);  // Motor 2 clockwise direction 
+  analogWrite(PWMB, 0);   // Speed is 0
+  delay(100);
+}
+}:
+--------------------------DEFINE PINS/OBJECT----------------------------------
+#define AIN1 8 // pin 8 on arduino is connected to motor A
+#define BIN1 7 // pin 7 on arduino is connected to motor B
+#define PWMA 5 // pin 5 on arduino is connected to motor A
+#define PWMB 6 // pin 6 on arduino is connected to motor B 
+#define STBY 3 // STBY pin 3 on Arduino Uno used for direction
+
+MOTOR Motor ( AIN1,BIN1,PWMA,PWMB,STBY);
+// defines new object of the MOTOR class
+// passes five parameters to its constructor
+--------------------------SETUP----------------------------------
+void setup(){
+  Motor.init();      // function called within the setup
+}
+--------------------------LOOP-----------------------------------
+void loop() {        // code runs in a loop
+  Motor.forward ();  // forward function 
+  delay(1000);       // program stops for 1 second 
+  Motor.backward (); // backward function
+  delay(1000);       // program stops for 1 second 
+  Motor.Stop ();     // Stop function
+  delay(1000);       // program stops for 1 second 
+}
+
+
